@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<title>Compte Rendu de TP1</title>
+			<meta charset="utf-8">
+			<link rel="stylesheet" type="text/css" href="tp1.css">
+		</head>
+		<body>
+			<h1>Compte Rendu de TP1</h1>
+			<p id="subtitle">
+				Emilie Marti - Ingénieur Informatique I
+			</p>
+
+			<h2>Exercice 1 : Document de base</h2>
+
+			<ol>
+				<li>
+					<h3> Que manque t'il comme information à la balise head pour que le fichier s'affiche correctement ?</h3>
+					<p>
+						Il faut rajouter la balise <code>&lt;meta charset="utf-8"&gt; pour que l'information s'affiche correctement.</code>
+					</p>
+				</li>
+
+				<li>
+					<h3> A quoi servent les tags h1, h2 et h3 ?</h3>
+					<p>
+						Ces tags servent à marquer des titres (<i>headers</i>). Plus le nombre est petit, plus le titre sera gros ; cependant ceci peut etre changé ensuite via le fichier de style .css .
+					</p>
+				</li>
+
+				<li>
+					<h3> A quoi sert le tag p ?</h3>
+					<p>
+						Le tag p sert à envelopper les paragraphes "de base".
+
+						Les tags HTML commencent par une balise ouvrante &lt;foo&gt; et finissent par une balise fermante &lt;/foo&gt;.
+					</p>
+				</li>
+
+				<li>
+					<h3> Comment mettre en gras ou en italique ?</h3>
+					<p>
+						Il faut rajouter les balises &lt;b&gt; <b>gras</b> &lt;/b&gt; et &lt;i&gt; <i>italique</i> &lt;/i&gt;.
+					</p>
+				</li>
+
+				<li>
+					<h3> Et comment faire pour mettre un mot à la fois en gras et en italique ?</h3>
+					<p>
+						Il faut mettre le mot dans les deux balises ; la première balise ouvrante étant la dernière fermante : &lt;b&gt;&lt;i&gt; <b><i>gras et italique</i></b> &lt;/i&gt;&lt;/b&gt;.
+					</p>	
+				</li>
+				
+				<li>
+					<h3> On souhaite que le titre de la fenêtre du navigateur soit "Compte Rendu de TP1", comment faire ? </h3>
+					<p>
+						On rajoute le titre dans le tag &lt;title&gt; dans les balises &lt;head&gt;.
+					</p>
+				</li>
+
+				<li>
+					<h3> Ajoutez un lien (le tag A) vers le cours avec comme titre cours de programmation web. </h3>
+					<p>
+						<a href="http://forax.gitdub.io/course/progweb/html.html#/">Cours de Programmation Web</a>
+					</p>
+				</li>
+				
+				<li>
+					<h3> Prenez une feuille de papier puis dessinez l'arbre des différents tags correspondant à votre compte rendu. </h3>
+					<p>
+						L'arbre ci-dessous.
+					</p>
+				</li>
+				
+				<li>
+					<h3> Avec votre smartphone (ou celui du voisin), prenez une photo de la feuille de papier sur laquelle vous avez dessiné l'arbre et envoyez-la vous par mail. Puis allez dans vos mails pour récupérer l'image et la sauvegarder sous le nom de mon-super-arbre.jpg. </h3>
+					<p>
+						<img src="mon-super-arbre.jpg"
+							width="800"
+							alt="Mon super arbre pour les malvoyants">
+					</p>
+				</li>
+				
+				<li>
+					<h3> Creér le fichier tp1.css vide et ajouter un lien de votre compte rendu vers le fichier CSS pour que vous puissiez avoir un jolie rendu lorsque, à la maison, vous ajouterez quelques commandes CSS. </h3>
+					<p>
+						
+					</p>
+				</li>
+			</ol>
+
+			<h2>Exercice 2 : Uniform Resource Locator</h2>
+
+			<ol>
+				<li>
+					<h3> Ouvrez un navigateur Web et allez à l'URL suivante: <a href="https://www.w3.org/standards/">ici</a></h3>
+					<ul>
+						<li>
+							<h4>Quel est le nom de la machine à laquelle vous accédez ?</h4>
+							<p>
+								www.w3.org
+							</p>
+						</li>
+
+						<li>
+							<h4>Quel est le nom de domaine auquel vous accédez ? </h4>
+							<p>
+								org
+							</p>
+						</li>
+					</ul>
+				</li>
+
+				<li>
+					<h3>Si on exécute <i>host w3.org</i>, à quoi correspond la première ligne de la réponse ? À quoi correspond la troisième ligne de la réponse ? </h3>
+					<p>
+						La première ligne de la réponse donne l'adresse IP de la machine à laquelle on veut accéder (dans ce cas 128.30.52.37).
+						La troisième ligne de la réponse correspond au serveur mail de préference qui va recevoir les mails en SMTP envoyé vers la machine.
+					</p>
+				</li>
+
+				<li>
+					<h3>Dans le navigateur Web, dans la barre contenant l'URL, remplacez le nom de la machine par son adresse IP pour vérifier que cela fonctionne toujours. A votre avis, pourquoi utilise-t-on des noms pour les machines plutôt que des adresses IP ? </h3>
+					<p>
+						Remplacer l'url par son adresse IP va permettre au navigateur d'accéder au meme site (cependant, il faut l'accepter en exceptions car il ne vérifie pas les conditions de sécurité). On donne plutot le nom des machines parce que c'est plus simple pour l'etre humain de s'en rappeler.
+					</p>
+				</li>
+
+				<li>
+					<h3> Exécutez la commande traceroute sur cette adresse IP. </h3>
+					<ul>
+						<li>
+							<h4> Qu'affiche cette commande ? </h4>
+							<p>
+								Elle affiche toutes les machines par lesquelles passe notre requete pour arriver jusqu'à sa destination.
+							</p>
+						</li>
+
+						<li>
+							<h4> Quel est le nom du routeur de sortie situé à l'université ? </h4>
+							<p>
+								gwetud.u-pem.fr.
+							</p>
+						</li>
+
+						<li>
+							<h4> Comment s'appelle le réseau sur lequel est connecté l'université ? </h4>
+							<p>
+								renater.fr.
+							</p>
+						</li>
+
+						<li>
+							<h4> Quels sont les autres réseaux qui sont traversés ? </h4>
+							<p>
+								geant.net, zayo.com, akamai.com, mit.edu.
+							</p>	
+						</li>
+					</ul>
+				</li>
+
+				<li>
+					<h3> On cherche maintenant à faire la même chose avec la machine hébergeant le cours http://forax.gitdub.io/course/progweb/. Que se passe-t-il si on essaye d'accéder à la page du cours dans le browser en remplaçant le nom de la machine par l'adresse IP trouvée précédemment ? </h3>
+					<p>
+						On arrive jusqu'au site de gitdub mais le cours n'est pas affiché. (erreur 404), car gitdub héberge plusieurs sites et si on ne précise pas l'adresse, la machine ne sait pas quel site il faut afficher.
+					</p>
+				</li>
+
+				<li> <h3>On cherche à savoir si le cours est hébergé physiquement aux États-Unis, sachant qu'il est hébergé par la startup Californienne Gitdub.</h3>
+				<p>
+					Cette machine est hébergée à New York (NY) aux Etats Units (US).
+					Lorsqu'on fait un ping à imnh.org on obtient une moyenne de 80ms de latence, alors que lorsqu'on fait un ping au site du cours on obtient une moyenne de 9ms de latence.
+					Ceci nous indique que la machine hébergeant le site ne se trouve pas au meme endroit que la machine qui héberge Gitdub.
+				</p>
+				</li>
+			</ol>
+			
+			<h2>Exercice 3 : Perroquet, quelle heure il est ?</h2>
+
+			<ol>
+				<li>
+					<h3> On cherche à savoir à quoi correspond le fichier /etc/services. Pour cela, dans le terminal tapez la commande man services </h3>
+					<p>
+						Le fichier /etc/services fourni une correspondance entre les noms des services et leur numéro de port associés, ainsi que leurs protocoles.
+
+						On a par exemple :
+						socks - 1080/tcp
+					</p>
+				</li>
+
+				<li>
+					<h3>Rappelez ce que fait la commande grep. Utilisez la commande grep pour déterminer le numéro du port TCP correspondant au service echo.</h3>
+					<p>
+						La commande grep sert à chercher un mot dans un fichier ; si ce mot existe, elle va afficher sur la ligne standard la ligne où il se trouve.
+
+						<code>cat /etc/servuces | grep echo</code>
+
+						Le port TCP de la commande echo est le 7.
+					</p>
+				</li>
+
+				<li>
+					<h3> Utilisez la commande nc pour tester le service echo sur la machine gaspard.univ-mlv.fr. </h3>
+					<p>
+						Lorsqu'on écrit quelque chose sur le terminal, celui-ci affiche le message une seconde fois, en se comportant comme la commande echo.
+					</p>
+				</li>
+
+				<li>
+					<h3>Faites la même manipulation avec le service daytime toujours sur la machine gaspard.univ-mlv.fr. Comment interpréter la réponse de la machine ? </h3>
+					<p>
+						Le port TCP de la commande daytime est 13. Lorsqu'on fait un netcat sur la machine gaspard.univ-mlv.fr sur le port 13, on obtient l'heure et la date de la machine hébergeant ce site.
+					</p>
+				</li>
+				<li>
+					<h3> Enfin, quel est le port TCP correspondant au service HTTP ? </h3>
+					<p>
+						Port 80.
+					</p>
+				</li>
+			</ol>
+
+			<h2>Exercice 4 : Service HTTP</h2>
+
+			<ol>
+				<li>
+					<h3> Quel est le header (l'entête, en français) de la réponse ? </h3>
+					<p>
+						HTTP/1.1 200 OK
+						Date: Thu, 29 Nov 2018 08:40:24 GMT
+						Server: Apache
+						Content-Length: 2957
+						Connection: close
+						Content-Type: text/html; charset=UTF-8
+
+					</p>
+				</li>
+
+				<li>
+					<h3> A quoi correspondent les 3 valeurs sur la première ligne de l'entête ? </h3>
+					<p>
+						<ul>
+							<li>
+								1.1 est la version utilisée.
+							</li>
+							<li>
+								200 : Tout c'est bien passé.
+							</li>
+						</ul>
+					</p>
+				</li>
+
+				<li>
+					<h3> Quel est le nom du serveur Web ? </h3>
+					<p>
+						Apache
+					</p>
+				</li>
+
+				<li>
+					<h3> A quoi correspond la valeur de Content-Type ? </h3>
+					<p>
+						Cette valeur indique le type de fichier qui est lu en console et l'encodage UTF-8.
+					</p>
+				</li>
+
+				<li>
+					<h3> A quoi correspond la valeur de Content-Length ? </h3>
+					<p>
+						Il s'agit de la taille du fichier en octets.
+					</p>
+				</li>
+
+				<li>
+					<h3> Faites la même analyse mais avec la requête <i>GET /ens/toto.txt HTTP/0.9</i></h3>
+					<p>
+						On a l'erreur 404 (le fichier n'existe pas) et la version est 1.1. Le serveur est apache et le content-type indique que le type de fichier espéré (un fichier de texte html). Comme le fichier n'existe pas, il n'y a pas de taille indiquée.
+					</p>
+				</li>
+
+				<li>
+					<h3> Enfin, faites la même analyse avec la requête <i>GET /index.html HTTP/0.9</i></h3>
+					<p>
+						Le code de retour est 302 ; la page a été trouvée, mais elle se trouve ailleurs, la requete propose donc une redirection. La version est 1.1 et le serveur est Apache. La taille est de 279 octets et il s'agit d'un fichier texte de type html avec l'encodage iso-8859-1.
+					</p>
+				</li>
+
+				<li>
+					<h3> À quoi correspond la valeur de Location ? </h3>
+					<p>
+						Au site auquel on a été redirigés.
+					</p>
+				</li>
+			</ol>
+
+			<h2>Exercice 5 : Listes et tables</h2>
+
+			<ol>
+				<li>
+					<h3> Dans votre compte rendu, écrivez la liste suivante sous forme d'une liste numérotée </h3>
+					<p>
+						<ol>
+							<li>
+								carotte
+							</li>
+							<li>
+								navet
+							</li>
+							<li>
+								betterave
+							</li>
+						</ol>
+					</p>
+				</li>
+
+				<li>
+					<h3> Recopiez le code de la liste de la question précédente et modifiez-le pour que la liste ne soit plus une liste numérotée mais une liste à puces. Les items seront dont précédés de petits cercles au lieu de chiffres. </h3>
+					<p>
+						<ul>
+							<li>
+								carotte
+							</li>
+							<li>
+								navet
+							</li>
+							<li>
+								betterave
+							</li>
+						</ul>
+					</p>
+				</li>
+
+				<li>
+					<h3>Dans votre compte rendu, écrivez la table de multiplication suivante sous forme d'une table HTML </h3>
+					<p>
+						<table>
+							<tbody>
+								<tr>
+									<td>*</td><td>1</td><td>2</td><td>3</td><td>4</td>
+								</tr>
+								<tr>
+									<td>1</td><td>1</td><td>2</td><td>3</td><td>4</td>
+								</tr>
+								<tr>
+									<td>2</td><td>2</td><td>4</td><td>6</td><td>8</td>
+								</tr>
+								<tr>
+									<td>3</td><td>3</td><td>6</td><td>9</td><td>12</td>
+								</tr>
+								<tr>
+									<td>4</td><td>4</td><td>8</td><td>12</td><td>16</td>
+								</tr>
+							</tbody>
+						</table>
+					</p>
+				</li>
+
+				<li>
+					<h3> Modifiez la table pour que la première ligne et la première colonne soient considérées comme des titres (respectivement de colonnes ou de lignes). </h3>
+					<p>
+						<table>
+							<thead>
+									<th>*</th><th>1</th><th>2</th><th>3</th><th>4</th>
+							</thead>
+							<tbody>
+								<tr>
+									<th>1</th><td>1</td><td>2</td><td>3</td><td>4</td>
+								</tr>
+								<tr>
+									<th>2</th><td>2</td><td>4</td><td>6</td><td>8</td>
+								</tr>
+								<tr>
+									<th>3</th><td>3</td><td>6</td><td>9</td><td>12</td>
+								</tr>
+								<tr>
+									<th>4</th><td>4</td><td>8</td><td>12</td><td>16</td>
+								</tr>
+							</tbody>
+						</table>
+					</p>
+				</li>
+
+				<li>
+					<h3>On souhaite ajouter une case faisant 2 colonnes et une case faisant deux lignes. Allez chercher dans la spécification du Standard HTML5 comment faire pour avoir de telles cases et expliquez dans votre rapport comment vous avez fait pour trouver l'information. </h3>
+					<p>
+						<table>
+							<thead>
+									<th>*</th><th>1</th><th colspan="2">2 3</th><td>4</td>
+							</thead>
+							<tbody>
+								<tr>
+									<th rowspan="2">1</th><td>1</td><td>2</td><td>3</td><td>4</td>
+								</tr>
+								<tr>
+									<td>2</td><td>4</td><td>6</td><td>8</td>
+								</tr>
+							</tbody>
+						</table>
+						Les informations se trouvent sur le site https://www.w3schools.com/html/html_tables.asp , qui donne les balises et attribus disponibles en HTML pour les tableaux avec des exemples qu'on peut modifier pour observer la différence de comportement.
+					</p>
+				</li>
+			</ol>
+		</body>
+	</html>
