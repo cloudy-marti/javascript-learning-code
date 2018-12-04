@@ -1,25 +1,52 @@
 <!DOCTYPE html>
 <html>
- <meta charset="utf-8">
- <head>
-  <style>
-   //TODO
-  </style>
- </head>
- <body>
-   <div>
-    <ul>
-     <li>
-       Web
-       <!-- ul>
-        <li>Test1</li>
-        <li>Test2</li>
-       </ul -->
-     </li>
-     <li>HTML</li>
-     <li>CCS</li>
-     <li>About</li>
-    </ul>
-   </div>
- </body>
+	<meta charset="utf-8">
+	<head>
+		<style>
+			body {
+				font-family: "Arial", sans-serif;
+				font-weight: bold;
+			}
+
+			div {
+				background-color: Gold;			
+				position: fixed;
+/*				margin : 10px 10px 10px 10px;
+*/				width: 100%;
+				border-bottom: 2px solid SlateGrey;
+			}
+
+			ul {
+				list-style-type: none;
+			}
+
+			li {
+				float: left;
+				width: 100px;
+				color: SlateGrey;
+				height: 50px;
+			}
+
+			#about {
+				float: right;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div>
+			<ul>
+				<li>
+				Web
+				<!-- ul>
+				<li>Test1</li>
+				<li>Test2</li>
+				</ul -->
+				</li>
+				<li>HTML</li>
+				<li>CCS</li>
+				<li id="about">About</li>
+			</ul>
+		</div>
+	</body>
 </html>

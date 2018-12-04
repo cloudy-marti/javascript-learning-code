@@ -3,37 +3,45 @@
     <meta charset="utf-8">
     <head>
         <style>
-        body {
-            font-family: serif;
-        }
+            body {
+                font-family: serif;
+            }
 
-        img {
-            width: 180px;
-            border: 1px solid #aaaaaa;
-            padding: 1px;
-            margin-left: 5px;
-            margin-right: 5px;
-        }
+            img {
+                width: 180px;
+                border: 1px solid #aaaaaa;
+                padding: 1px;
+                position: relative;
+            }
 
-        img:hover {
-            opacity: 0.5;
-        }
+            img:hover {
+                opacity: 0.5;
+            }
 
-        .box {
-            width: 180px;
-            float: left;
-        }
+            .box {
+                float: left;
+                margin-left: 5px;
+                margin-right: 5px;
+                margin-bottom: 50px;
+                position: relative;
+            }
 
-        .title {
-            padding: 5px 5px 5px 5px;
-            background-color: black;
-            color: white;
-            text-align: center;
-        }
+            .title {
+                padding: 10px 1px 10px 1px;
+                background-color: black;
+                color: white;
+                text-align: center;
+                width: 180px;
+                margin-top: -10px;
+                position: absolute;
+                z-index: 10;
+                width: 182px;
+            }
 
-        .end {
-            clear: both;
-        }
+            .end {
+                clear: both;
+                padding: 5px;
+            }
         </style>
     </head>
     <body>
@@ -63,7 +71,7 @@
         </div>
         <div class="end"></div>
         <div> 
-            Ce texte doit s'afficher après toute les images en bas.
+            Ce texte doit s'afficher après toutes les images en bas.
         </div>
     </body>
 </html>

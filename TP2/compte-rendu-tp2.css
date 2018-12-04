@@ -10,6 +10,7 @@ body {
     margin: 5%;
     text-align: center;
     background-image: url("background.jpg");
+    font-size: 0.8em;
 }
 
 h1, h2, h3, p {
@@ -34,15 +35,11 @@ h2 {
 	text-decoration: underline;
 }
 
-#subtitle {
-	color: SteelBlue;
-}
-
 ol {
 	list-style-type: upper-roman;
 }
 
-div {
+.tp {
 	background-color: rgba(0,0,0,0.5);
 	margin: 5%;
 	text-align: justify;
@@ -50,28 +47,24 @@ div {
 	padding: 10px;
 }
 
-
-a {
-    letter-spacing: 0.08em;
-    color: SkyBlue;
-    text-align: center;
-    margin:0;
-}
-
 table {
-	/*margin: auto;*/
 	border-collapse: collapse;
 	width: 100%;
-	text-align: center;
-	padding: 5px 5px 5px 5px;
+	color: black;
 }
 
 tr:nth-child(even) {
 	background-color: rgb(80%, 80%, 90%);
 }
 
+tr:hover {
+	background-color: #121282;
+}
+
 th {
 	font-variant: small-caps;
+	padding: 5px;
+	text-align: center;
 }
 
 img {
@@ -82,10 +75,5 @@ img {
 
 th,td,tr {
 	border: 1px solid LightSteelBlue;
- 	text-align: center;
+	text-align: left;
 }
-
-::selection {
-  color: WhiteSmoke;
-  background: rgba(0,0,0,0.8);
-}*/
