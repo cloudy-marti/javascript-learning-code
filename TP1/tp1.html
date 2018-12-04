@@ -34,28 +34,28 @@
 						<p>
 							Le tag p sert à envelopper les paragraphes "de base".
 
-							Les tags HTML commencent par une balise ouvrante &lt;foo&gt; et finissent par une balise fermante &lt;/foo&gt;.
+							Les tags HTML commencent par une balise ouvrante <code>&lt;foo&gt;</code> et finissent par une balise fermante <code>&lt;/foo&gt;</code>.
 						</p>
 					</li>
 
 					<li>
 						<h3> Comment mettre en gras ou en italique ?</h3>
 						<p>
-							Il faut rajouter les balises &lt;b&gt; <b>gras</b> &lt;/b&gt; et &lt;i&gt; <i>italique</i> &lt;/i&gt;.
+							Il faut rajouter les balises <code>&lt;b&gt;</code> <b>gras</b> <code>&lt;/b&gt;</code> et <code>&lt;i&gt;</code> <i>italique</i> <code>&lt;/i&gt;</code>.
 						</p>
 					</li>
 
 					<li>
 						<h3> Et comment faire pour mettre un mot à la fois en gras et en italique ?</h3>
 						<p>
-							Il faut mettre le mot dans les deux balises ; la première balise ouvrante étant la dernière fermante : &lt;b&gt;&lt;i&gt; <b><i>gras et italique</i></b> &lt;/i&gt;&lt;/b&gt;.
+							Il faut mettre le mot dans les deux balises ; la première balise ouvrante étant la dernière fermante : <code>&lt;b&gt;&lt;i&gt;</code> <b><i>gras et italique</i></b> <code>&lt;/i&gt;&lt;/b&gt;</code>.
 						</p>	
 					</li>
 					
 					<li>
 						<h3> On souhaite que le titre de la fenêtre du navigateur soit "Compte Rendu de TP1", comment faire ? </h3>
 						<p>
-							On rajoute le titre dans le tag &lt;title&gt; dans les balises &lt;head&gt;.
+							On rajoute le titre dans le tag <code>&lt;title&gt;</code> dans les balises <code>&lt;head&gt;</code>.
 						</p>
 					</li>
 
@@ -195,9 +195,9 @@
 						<h3>Rappelez ce que fait la commande grep. Utilisez la commande grep pour déterminer le numéro du port TCP correspondant au service echo.</h3>
 						<p>
 							La commande grep sert à chercher un mot dans un fichier ; si ce mot existe, elle va afficher sur la ligne standard la ligne où il se trouve.
-
-							<code>cat /etc/servuces | grep echo</code>
-
+							<br>
+							<code>>> cat /etc/services | grep echo</code>
+							<br>
 							Le port TCP de la commande echo est le 7.
 						</p>
 					</li>
@@ -230,13 +230,12 @@
 					<li>
 						<h3> Quel est le header (l'entête, en français) de la réponse ? </h3>
 						<p>
-							HTTP/1.1 200 OK
-							Date: Thu, 29 Nov 2018 08:40:24 GMT
-							Server: Apache
-							Content-Length: 2957
-							Connection: close
+							HTTP/1.1 200 OK<br>
+							Date: Thu, 29 Nov 2018 08:40:24 <br>
+							Server: Apache<br>
+							Content-Length: 2957<br>
+							Connection: close<br>
 							Content-Type: text/html; charset=UTF-8
-
 						</p>
 					</li>
 

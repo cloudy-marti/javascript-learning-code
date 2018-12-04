@@ -3,16 +3,17 @@
 		<head>
 			<title>Compte Rendu de TP2</title>
 			<meta charset="utf-8">
-			<link rel="stylesheet" type="text/css" href="tp1.css">
+			<link rel="stylesheet" type="text/css" href="compte-rendu-tp2.css">
 		</head>
-		<body style="font-family:sans-serif;">
-			<h1>Compte Rendu de TP2</h1>
+		<!-- <body style="font-family:sans-serif;"> -->
+		<body>
+			<!-- <h1 style="font-size: 24px"> --><h1>Compte Rendu de TP2</h1>
 			<p id="subtitle">
 				Emilie Marti - Ingénieur Informatique I
 			</p>
 
 			<div>
-				<h2 style="color: orange">Exercice 1 : Style de base</h2>
+				<!-- <h2 style="color: orange, font-size: 18px"> --> <h2>Exercice 1 : Style de base</h2>
 
 				<ol>
 					<li>
@@ -25,12 +26,12 @@
 					<li>
 						<h3>Déclarez une balise style à l'intérieur des balises head du document, puis faites en sorte que tout le document utilise une police sans-serif.</h3>
 						<p>
-							Pour que ça marche, il faut mettre cet attribus dans la balise body.
+							Pour que ça marche, en tout cas sur Opera, il faut mettre cet attribus dans la balise body.
 						</p>
 					</li>
 
 					<li>
-						<h3>Faites en sorte que la balise h1 corresponde à une police de 24 points, la balise h2 à une police de 18 points et la balise h3 à une police 16 points.</h3>
+						<!-- <h3 style="font-size: 16px"> --><h3>Faites en sorte que la balise h1 corresponde à une police de 24 points, la balise h2 à une police de 18 points et la balise h3 à une police 16 points.</h3>
 						<p>
 							
 						</p>
@@ -71,95 +72,47 @@
 
 				<ol>
 					<li>
-						<h3></h3>
+						<h3>On veut maintenant créer une feuille de style externe, c'est-à-dire une feuille de style déclarée non pas à l'intérieur de compte-rendu-tp2.html mais dans un fichier externe nommé compte-rendu-tp2.css. </h3>
 						<p>
 							
 						</p>
 					</li>
 
 					<li>
-						<h3></h3>
+						<h3>Faites en sorte que la liste des questions de cet exercice et de l'exercice précédent utilise les chiffres romains (en minuscule) plutôt que les traditionnels chiffres 1, 2, 3, etc.</h3>
 						<p>
-							
+							Il faut rajouter le code :
+							<code>ol {
+								list-style-type: upper-roman;
+							}</code>
 						</p>
 					</li>
 
 					<li>
-						<h3></h3>
+						<h3>Donc dans un premier temps, créez la table HTML en utilisant les balises table, th et td dans votre compte rendu.</h3>
 						<p>
-							
-						</p>
-					</li>
-
-					<li>
-						<h3></h3>
-						<p>
-							
-						</p>
-					</li>
-
-					<li>
-						<h3></h3>
-						<p>
-							
-						</p>
-					</li>
-
-					<li>
-						<h3></h3>
-						<p>
-							
-						</p>
-					</li>
-				</ol>
-			</div>
-			<div>
-				<h2>Exercice 3 : Perroquet, quelle heure il est ?</h2>
-
-				<ol>
-					<li>
-						<h3></h3>
-						<p>
-
-						</p>
-					</li>
-
-					<li>
-						<h3></h3>
-						<p>
-							
-						</p>
-					</li>
-
-					<li>
-						<h3></h3>
-						<p>
-
-						</p>
-					</li>
-
-					<li>
-						<h3></h3>
-						<p>
-
-						</p>
-					</li>
-					<li>
-						<h3></h3>
-						<p>
-							
-						</p>
-					</li>
-				</ol>
-			</div>
-			<div>
-				<h2>Exercice 4 : Service HTTP</h2>
-
-				<ol>
-					<li>
-						<h3></h3>
-						<p>
-
+							<table>
+								<thead>
+										<th>#</th><th>Film</th><th>Gross</th>
+								</thead>
+								<tbody>
+									<tr>
+										<th>1</th><td>Jumanji: Welcome to the Jungle</td><td>$37,233,653</td>
+									</tr>
+									<tr>
+										<th>2</th><td>Jumanji: Welcome to the Jungle</td><td>$28,101,972</td>
+									</tr>
+									<tr>
+										<th>3</th><td>Jumanji: Welcome to the Jungle</td><td>$19,505,170</td>
+									</tr>
+									<tr>
+										<th>4</th><td>Maze Runner: The Death Cure</td><td>$24,167,011</td>
+									</tr>
+									<tr>
+										<th>5</th><td>Jumanji: Welcome to the Jungle</td><td>$10,930,222</td>
+									</tr>
+								</tbody>
+							</table>
 						</p>
 					</li>
 
@@ -183,73 +136,6 @@
 							
 						</p>
 					</li>
-
-					<li>
-						<h3></h3>
-						<p>
-
-						</p>
-					</li>
-
-					<li>
-						<h3></h3>
-						<p>
-
-						</p>
-					</li>
-
-					<li>
-						<h3></h3>
-						<p>
-
-						</p>
-					</li>
-
-					<li>
-						<h3></h3>
-						<p>
-
-						</p>
-					</li>
-				</ol>
-			</div>
-			<div>
-				<h2>Exercice 5 : Listes et tables</h2>
-
-				<ol>
-					<li>
-						<h3></h3>
-						<p>
-
-						</p>
-					</li>
-
-					<li>
-						<h3></h3>
-						<p>
-
-						</p>
-					</li>
-
-					<li>
-						<h3></h3>
-						<p>
-							
-						</p>
-					</li>
-
-					<li>
-						<h3></h3>
-						<p>
-
-						</p>
-					</li>
-
-					<li>
-						<h3></h3>
-						<p>
-							
-						</p>
 				</ol>
 			</div>
 		</body>
