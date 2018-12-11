@@ -132,10 +132,10 @@
 						<h3>Donc dans un premier temps, créez la table HTML en utilisant les balises table, th et td dans votre compte rendu.</h3>
 						<p>
 							<table>
-								<thead>
-										<th>#</th><th>Film</th><th class="right">Gross</th>
-								</thead>
 								<tbody>
+									<tr>
+										<th>#</th><th>Film</th><th class="right">Gross</th>
+									</tr>
 									<tr>
 										<th>1</th><td>Jumanji: Welcome to the Jungle</td><td class="right">$37,233,653</td>
 									</tr>
@@ -187,7 +187,7 @@
 					<li>
 						<h3> Changez la couleur de fond des lignes paires (even) pour mettre du bleu (80% de rouge, 80% de vert et 90% de bleu) en utilisant la pseudo-classe :nth-child. </h3>
 						<p>
-							Les lignes prises en compte sont celles qui ne font pas partie du titre, avec <code>tr:nth-child(even) {<br>background-color: rgb(80%, 80%, 90%);<br>}</code>
+							On peut faire cela avec <code>tr:nth-child(even) {<br>background-color: rgb(80%, 80%, 90%);<br>}</code>
 						</p>
 					</li>
 
@@ -284,54 +284,67 @@
 					<li>
 						<h3> Faites en sorte que la liste ait une position fixe, en haut à gauche de la partie affichage du navigateur. </h3>
 						<p>
+							Il faut mettre <code>position : fixed</code> ; de base il est déjà en haut à gauche.
 						</p>
 					</li>
 
 					<li>
 						<h3> Retirez le style par défaut des items de liste (avec list-style-type) pour qu'il n'y ait pas de style par défaut. </h3>
 						<p>
+							Il faut mettre <code>list-style-type : none;</code> dans la balise ul.
 						</p>
 					</li>
 
 					<li>
 						<h3>  Affichez les items en gras et avec une police Arial (ou sinon sans-serif). </h3>
 						<p>
+							<code>
+								font-family: "Arial", sans-serif;
+								font-weight: bold;
+							</code>
+							On peut mettre ce code dans body.
 						</p>
 					</li>
 
 					<li>
 						<h3> Faites en sorte que les items soient affichés horizontalement collés à gauche et non plus verticalement. </h3>
 						<p>
+							POur cela on peut mettre un float : left.
 						</p>
 					</li>
 
 					<li>
 						<h3> Faites en sorte que les items aient une largeur de 100 pixels et ajoutez un espacement d'une dizaine de pixel entre les items. </h3>
 						<p>
+							Pour cela on change la valeur de width à 100px et une marge de 10px.
 						</p>
 					</li>
 
 					<li>
 						<h3> Changez le fond du menu pour qu'il soit de couleur jaune (yellow), en chantant yellow submarine, et changez la couleur des items pour qu'ils soient gris foncés. </h3>
 						<p>
+							On change le background dans le div qui enveloppe toute la liste puis la couleur pour chaque élément de la liste.
 						</p>
 					</li>
 
 					<li>
 						<h3> Fixez la hauteur (height) du menu à 50 pixels puis faites en sorte que le menu occupe toute la largeur (width). </h3>
 						<p>
+							On le change dans li.
 						</p>
 					</li>
 
 					<li>
 						<h3> Faites en sorte que l'item 'About' soit affiché à droite de la barre de menu. </h3>
 						<p>
+							On lui met une classe et on fait float : right.
 						</p>
 					</li>
 
 					<li>
 						<h3> Affichez une ligne de 2 pixels en bas du menu. </h3>
 						<p>
+							On met dans le div : <code>border-bottom</code> avec les caractéristiques voulues.
 						</p>
 					</li>
 
@@ -342,6 +355,13 @@
 						</p>
 					</li>
 				</ol>
+			</div>
+
+			<div class="tp">
+				<h2>Conclusion</h2>
+				<p>
+					Sur ce TP on a appris à utiliser la feuille de style CSS pour faire une mise en page des éléments de l'HTML, notament au niveau du positionnement des images par rapport à d'autres images ou textes (sans flex-box ou similaires car ce n'est pas forcément supporté par tous les navigateurs) et autres éléments comme l'édition de tableaux ou autres.
+				</p>
 			</div>
 		</body>
 	</html>

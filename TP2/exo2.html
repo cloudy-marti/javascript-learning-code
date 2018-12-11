@@ -11,8 +11,7 @@
 			div {
 				background-color: Gold;			
 				position: fixed;
-/*				margin : 10px 10px 10px 10px;
-*/				width: 100%;
+				width: 100%;
 				border-bottom: 2px solid SlateGrey;
 			}
 
@@ -31,18 +30,35 @@
 				float: right;
 			}
 
+            #subweb {
+                padding: 0px;
+                margin-top: 10px;
+                position: relative;
+                clear: all;
+                float: none;
+                display: none;
+            }
+
+            ul li:hover ul {
+                display: block;
+            }
+
+            .subli {
+                background: rgb(0,0,0,0.8);
+            }
+            
 		</style>
 	</head>
 	<body>
 		<div>
 			<ul>
-				<li>
+				<li id="web">
 				Web
-				<!-- ul>
-				<li>Test1</li>
-				<li>Test2</li>
-				</ul -->
-				</li>
+           			<ul id="subweb">
+        				<li>Test1</li>
+        				<li>Test2</li>
+    				</ul>
+    			</li>
 				<li>HTML</li>
 				<li>CCS</li>
 				<li id="about">About</li>
