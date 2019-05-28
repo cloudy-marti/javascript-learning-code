@@ -1,0 +1,76 @@
+html {
+    height:100%;
+}
+
+body {
+	font-family: sans-serif;
+    width: 100%;
+    height: 100%;
+    margin: 5%;
+    text-align: center;
+    font-size: 0.8em;
+}
+
+h1, h2, h3, p {
+	margin-left: 2.5%;
+	margin-right: 2.5%;
+}
+
+h1 {
+    text-shadow: -0.1em 0 LightSteelBlue;
+    color: black;
+    letter-spacing: 0.08em;
+    font-size: 3em;
+}
+
+h2, h3, h4 {
+	font-weight: normal;
+	color: SteelBlue;
+}
+
+h2 {
+	color: orange;
+	text-decoration: underline;
+}
+
+ol {
+	list-style-type: upper-roman;
+}
+
+.tp {
+	margin: 5%;
+	text-align: justify;
+	border: 1.5px solid LightSteelBlue;
+	padding: 10px;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+	color: black;
+}
+
+tr:nth-child(even) {
+	background-color: rgb(80%, 80%, 90%);
+}
+
+tr:hover {
+	background-color: #121282;
+}
+
+th {
+	font-variant: small-caps;
+	padding: 5px;
+	text-align: center;
+}
+
+img {
+	display: block;
+	margin: auto;
+	width: 70%;
+}
+
+th,td,tr {
+	border: 1px solid LightSteelBlue;
+	text-align: left;
+}

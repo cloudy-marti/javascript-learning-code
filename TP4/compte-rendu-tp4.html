@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<title>Compte Rendu de TP4</title>
+			<meta charset="utf-8">
+			<link rel="stylesheet" type="text/css" href="compte-rendu-tp4.css">
+		</head>
+		<body>
+			<h1 class="centered">Compte Rendu de TP4</h1>
+			<div class="right">
+				<p>
+					Emilie Marti - Ingénieur Informatique I
+				</p>
+			</div>
+
+			<div class="tp">
+				<h2>Exercice 1 - Memory</h2>
+
+				<ol>
+					<li>
+						<h3>
+							A quoi sert la fonction MemoryGame ?
+						</h3>
+						<p>
+							Elle sert à instancier un "objet" de la "classe" MemoryGame (en Javascript il n'y a pas de vraies classes ni objets mais ça simule le principe). Il s'agit du coup d'un constructeur.
+						</p>
+					</li>
+
+					<li>
+						<h3>Pourquoi le nom de la fonction <tt>MemoryGame</tt> commence par une majuscule ?
+					</h3>
+						<p>
+							Elle est en majuscule par convention, car comme ça cela ressemble plus à une classe en Java et ça rend le code plus lisible (on comprend tout de suite qu'on est en train de simuler une classe avec la majuscule).
+						</p>
+					</li>
+
+					<li>
+						<h3>Expliquez le code suivant :
+							<br>
+							<tt>
+								MemoryGame.prototype.build = function build(div) {
+								  // TODO
+								}
+							</tt>
+						    <br>
+						    A quoi sert <tt>MemoryGame.prototype</tt> ?
+						</h3>
+						<p>
+							Elle sert à créer un délégué de la classe MemoryGame, une méthode qui pourra etre appelée sous la forme MemoryGame.build(div). On s'en servira pour dessiner les cartes dans le div courant.
+						</p>
+					</li>
+
+					<li>
+						<h3>
+							Que fait la fonction <tt>shuffleCards</tt> et en quoi cela aide pour la mise au point du programme ?
+						</h3>
+						<p>
+							Avec une taille donnée, elle créé un tableau dans lequel elle ajoute deux fois l'index courant (1 1 2 2 3 3 etc ...).
+    						<p>
+    						On l'appelle au début de la méthode build pour pouvoir dessiner deux fois chaque image.
+						</p>
+					</li>
+
+					<li>
+						<h3>
+							Rappeler les deux techniques permettant de modifier l'arbre DOM. 
+							<br>
+							Sachant que l'on veut ajouter un écouteur d'évènement pour savoir si on clique sur une carte, quelle solution doit-on choisir ?
+						</h3>
+						<p>
+							On peut modifier le fichier html directement, mais vu qu'il s'agit d'une page qui va écouter des événements, on va modifier l'arbre DOM avec JavaScript et les fonctions de la "classe" <tt>document</tt>, qui permettent d'accéder à des éléments de l'arbre (en les récupérant avec des fonctions du type document.getElementBySomething), voire aux nodes parents ou enfants.
+							<br>
+							En JavaScript on peut utiliser innerText ou innerHTML, soit write(). InnerHTML nous permettant de changer des valeurs dans l'arbre, on va choisir innerHTML.
+						</p>	
+					</li>
+					
+					<li>
+						<h3>
+							Comment faire pour que le tableau des images soit accessible lors d'un clic ?
+						</h3>
+						<p>
+							On écrit dynamiquement avec JavaScript dans l'arbre DOM du site une balise qui aura un attribut de type <tt>onclick</tt> et la valeur de cet attribus sera un appel de la fonction <tt>toggleOnClick</tt>.
+						</p>
+					</li>
+
+					<li>
+						<h3>Comment faire pour ne pas prendre en compte les cartes déjà retournées (il y a deux cas) ?</h3>
+						<p>
+							Nous avons deux cas de figure :
+							<br>
+							<ul>
+								<li>
+									Une seule carte est retournée, du coup il ne faut pas que le joueur puisse la re-retourner (ou cliquer dessus et que le tour soit passé).
+									<br>
+									On sauvegarde dans un champs de notre <tt>class MemoryGame</tt> une <tt>visibleCard</tt> qui va témoigner de la carte retournée. Cette carte n'est plus clickable et sera comparée à la carte découverte ensuite, pour voir si ce sont les mêmes ou pas.
+								</li>
+								<br>
+								<li>
+									Deux cartes ont été découvertes, sont pareilles donc doivent rester visibles et le joueur ne peut pas les retourner.
+									<br>
+									On créé un champs <tt>discoveredCards</tt> qui va avoir les cartes qui ont été découvertes avec sa paire, et ne seront plus clickables.
+								</li>
+							</ul>
+						</p>
+					</li>
+					<li>
+						<h3>
+							Pour cela, le plus simple est d'attendre 500 ms avant de retourner les cartes. Comment écrire cela en JavaScript ?							
+						</h3>
+						<p>
+							On va utiliser la fonction setTimeout, qui va demander en paramètre une fonction et un timeout. Après le timeOut donnée, setTimeout va exécuter la fonction passée en paramètre.
+						</p>
+					</li>
+				</ol>
+			</div>
+
+			<div class="tp">
+				<h2>
+					Exercice 2 - JavaScript 2015
+				</h2>
+				<p>
+					Les grosses modifications ont été transformer le MemoryGame en class et écrire les fonctions de type prototype dans le scope de la classe (sans le label prototype du coup). On peut les appeler comme d'habitude du coup, et cela a l'avantage de ressembler plus à de la programmation objet lors de l'écriture.
+				</p>
+			</div>
+
+			<div class="tp">
+				<h2>Conclusion</h2>
+				<p>
+					Avec ce TP on a développé un jeu de Memory en javascript. Ce jeu a une mécanique simple ; en effet, il s'agit juste de mettre des cartes face cachées et les retourner, de deux en deux, en essayant de trouver la paire.
+					<br>
+					Pour ce faire, on a utilisé JavaScript 2015, qui permet d'utiliser des "classes". Ce ne sont pas de vraies classes dans leur fonctionnement, mais elles permettent une écriture de code plus lisible et semblable aux langages objets tels que le Java, ainsi que d'utiliser des champs et des méthodes propres à la classe.
+					<br>
+					On a récupéré des ressources locales (les images) qu'on a utilisé pour afficher le jeu sur le navigateur.
+					<br>
+					La mécanique est codée en JavaScript, et ensuite on a utilisé la méthode innerHTML pour mettre à jour les cartes lorsque le joueur clique dessus.
+				</p>
+			</div>
+		</body>
+	</html>

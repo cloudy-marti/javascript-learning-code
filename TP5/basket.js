@@ -18,43 +18,37 @@ ajax.onreadystatechange = function()
 	}
 	else
 	{
-		// switch(state)
-		// {
-		// 	case 1 :
-		// 		responseText = "opened";
-		// 		break;
-		// 	case 2 :
-		// 		responseText = "headers_received";
-		// 		break;
-		// 	case 3 :
-		// 		responseText = "loading";
-		// 		break;
-		// 	case 4 :
-		// 		responseText = "done";
-		// 		break;
-		// 	default :
-		// 		break;
 		let data = JSON.parse(ajax.responseText);
 		console.log(data);
 		// dictionnaire
-
-		let table = document.getElementById("quantity");
-
-		table.innerHTML += data.map((i) =>
-			{
-				`<tr><td>${i.name}</td><td>${i.name}</td></tr>`
-			});
+		updateTable(data);
+		updateQuantity(data);
 	}
+}
 
+function updateTable(data)
+{
+	let tableDiv = document.getElementById("basket");
 
-	console.log(state + '  ' + responseText);
+	tableDiv.innerHTML += data.map((fruit) =>
+		{
+			return `<tr><td>${fruit.name}</td><td>${fruit.quantity}</td></tr>`;
+		}).join('');
+}
+
+function updateQuantity(data)
+{
+	let quantityDiv = document.getElementById("quantity");
+
+	quantityDiv.innerHTML = data.reduce((quantity, fruit) =>
+		{
+			return quantity + fruit.quantity;
+		}, 0);
 }
 
 ajax.open("GET", "fruits.json", true);
 ajax.overrideMimeType("application/json");
 ajax.send();
-
-
 
 /**
 

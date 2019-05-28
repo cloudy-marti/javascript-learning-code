@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<title>Compte Rendu de TP5</title>
+			<meta charset="utf-8">
+			<link rel="stylesheet" type="text/css" href="compte-rendu-tp5.css">
+		</head>
+		<body>
+			<h1 class="centered">Compte Rendu de TP5</h1>
+			<div class="right">
+				<p>
+					Emilie Marti - Ingénieur Informatique I
+				</p>
+			</div>
+
+			<div class="tp">
+				<h2>
+					Exercice 1 - Un panier de fruits
+				</h2>
+
+				<ol>
+					<li>
+						<h3>
+							Comment faire pour savoir si la requête a réussi ou échoué en utilisant les outils de développement de votre navigateur ? 
+							<br>
+							Testez si votre requête AJAX fonctionne avec Firefox et avec Chrome. Que se passe-t-il dans chaque cas, pourquoi ?
+						</h3>
+						<p>
+							L'outil de développement de notre navigateur est la console (ctrl+shift+i sur firefox) et on peut faire un console.log() pour afficher l'erreur ou la réussite de la requête.
+							<br>
+							Lorsqu'on appelle le fichier json en local, cela ne fonctionne que sur Firefox, et pas sur Chrome. Ceci est dû au fait que Chrome est plus sécurisé de ce coté là et n'accepte l'importation de fichiers .json que depuis des sites authentifiés (https). "Blocked by CORS policy".
+							<br>
+							Firefox est plus permissif et permet d'appeler le fichier json directement depuis les fichiers locaux.
+						</p>
+					</li>
+
+					<li>
+						<h3>
+							Transformez la chaîne de caractère stockée dans responseText au format JSON en objet JavaScript. Quel est le type d'objet JavaScript obtenu ?
+						</h3>
+						<p>
+							On obtient un dictionnaire.
+						</p>
+					</li>
+				</ol>
+			</div>
+
+			<div class="tp">
+				<h2>
+					Exercice 2 - Un panier de fruits (2)
+				</h2>
+				<ol>
+					<li>
+						<h3>
+							Quelle doit être la structure de données écrite dans le fichier prices.json ? 
+						</h3>
+						<p>
+							J'ai utilisé la même structure que pour le fichier fruits.json.
+						</p>
+					</li>
+
+					<li>
+						<h3>
+							Pourquoi utiliser le mécanisme de Promise est plus efficace ?
+						</h3>
+						<p>
+							Le mécanisme de Promise est bien plus efficace car il va exécuter les fonctions passés dans .then que lorsque la fonction est terminée. 
+						</p>
+					</li>
+				</ol>
+			</div>
+
+			<div class="tp">
+				<h2>Conclusion</h2>
+				<p>
+					Dans ce TP on a appris à utiliser les requêtes Ajax, coté client, pour récupérer des données dans un fichier JSON et les utiliser ensuite pour mettre à jour notre page HTML.
+					<br>
+					Le plus dur a été de savoir comment récupérer les données de plus d'un fichier Json, car un appels de open va écraser l'appel précédent, même si dans le code il est écrit après les fonctions de mise à jour.
+					<br>
+					On a ensuite utilisé le mécanisme de Promise qui va s'assurer que les fonctions asynchrones s'exécutent au moment où on veut, et pas risquer qu'elles s'exécutent au mauvais endroit.
+				</p>
+			</div>
+		</body>
+	</html>
