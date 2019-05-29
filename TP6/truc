@@ -1,0 +1,37 @@
+「Les Tips de Forax」(1)
+La boucle main devra être comme ça:
+- Keyboard Management
+- Calcule de Collision (Marquage puis suppression)
+- Bouger les elements
+- Clear le canvas
+- Dessiner sur le canvas
+
+「Les Tips de Forax」(2)
+Une seul classe pour les vaissaux ennemis et alliés.
+Passer les parametres differents (genre la couleur) en paramètre au constructeur 😉
+Ne mettre dans la classe que des méthodes qui "concernent directement" la classe.
+Exemple: Le calcul des collisions doit etre une fonction a part et pas une méthode la classe Bullet ou encore Vaisseau
+
+(Ui le 2eme point est mal formulé desolé)
+
+「Les Tips de Forax」(3)
+Il n'y a que 2 collision a gerer:
+- Un carré avec un carré
+(Ne pas gerer avec la méthode "distance des milieux)
+- Un carré et un point:
+Regarder si le point est dans le carré 😉
+
+Les Tips de Forax」(4)
+Surtout pas d'image ni rien, respecter a fond le cahier des charges.
+Les vaisseaux sont des triangles dessiné en Canvas, les bullets sont des points !
+
+Au debut du jeux, les 300 vaisseaux sont sur l'écran, 150 a gauche 150 a droit (dans un nuage en haut du canvas avec des decalages aléatoires)
+
+「Les Tips de Forax」(5)
+Surtout pas setInterval() !
+Utiliser un truc beaucoup mieux : RequestFrameAnimation ( quon a vu au dernier cours, c le dernier cours dans son site web, vers les dernieres slides)
+
+「Les Tips de Forax」(6)
+Pas de classe point ou vecteur !!!
+Faire des propriétes x et y !
+C'est beaucoup plus lent de suivre un pointure de structure que de faire un jump mémoir pour trouver x et y dans le même objet !

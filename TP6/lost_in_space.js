@@ -1,178 +1,233 @@
 "use strict";
- 
-// const directions =
-// {
-// 	UP: 0,
-// 	DOWN: 1,
-// 	LEFT: 2,
-// 	RIGHT: 3
-// }
 
-class Player
+class SpaceShip
 {
-	constructor(picture, canvas)
-	{
-		this.picture = picture;
-		
-		this.x = canvas.width / 2;
-		this.y = canvas.height;
+	constructor(px, py, vx, vy)
+	{		
+		this.px = px;
+		this.py = py;
 
-		this.vx = 0;
-		this.vy = 0;
+		this.vx = vx;
+		this.vy = vy;
 
-		this.ax = 0;
-		this.ay = 0;
+		this.sizeShip = 5;
 
-		console.log("x = " + this.x + "\ty = " + this.y);
+		this.isAlive = true;
+
+		this.isGoingDown = true;
 	}
 
+	fire()
+	{
 
+	}
 }
 
-
-
-// class Enemy
-// {
-// 	constructor(x, y)
-// 	{
-// 		this.x = (x == 1)?canvas.width:0;
-// 		this.y = y;
-// 	}
-
-// 	draw(context)
-// 	{
-// 		context.fill
-// 	}
-// }
-
-// class Bullet
-// {
-// 	constructor()
-// 	{
-
-// 	}
-// }
-
-class Space
+class bullets
 {
-	constructor(canvas)
+	constructor(px, py, vx, vy)
 	{
-		this.canvas = canvas;
+		this.px = px;
+		this.py = py;
 
-		this.player = new Player("assets/dog.png", canvas);
+		this.pyMax = py - Space.yBound/2;
+		
+		this.vx = vx;
+		this.vy = vy;
 
-		// this.enemies = new Array();
+		this.exists = true;
+	}
+}
+
+function updatePositionPlayer(spacecraft, canvasWidth, canvasHeight)
+{
+	spacecraft.px += spacecraft.vx;
+	spacecraft.py += spacecraft.vy;
+
+	if(spacecraft.px < spacecraft.sizeShip || spacecraft.px > canvasWidth - spacecraft.sizeShip)
+	{
+		spacecraft.vx *= -1;
 	}
 
-	build(canvas)
+	if(spacecraft.py < spacecraft.sizeShip || spacecraft.py > canvasWidth - spacecraft.sizeShip)
 	{
-		let context = this.canvas.getContext("2d");
-		window.view.draw(this.player, "cyan");
+		spacecraft.vy *= -1;
+	}	
+}
+
+function updatePositionEnemy(spacecraft, canvasWidth, canvasHeight)
+{
+	spacecraft.px += spacecraft.vx;
+	spacecraft.py += spacecraft.vy;
+
+	if(spacecraft.px < spacecraft.sizeShip)
+	{
+		spacecraft.px = spacecraft.sizeShip;
+		spacecraft.vx *= -1;
+
+		if(spacecraft.isGoingDown)
+		{
+			spacecraft.py += 5;
+		}
+		else
+		{
+			spacecraft.py -= 5;
+		}
 	}
+
+	if(spacecraft.px > canvasWidth - spacecraft.sizeShip)
+	{
+		spacecraft.px = canvasWidth - spacecraft.sizeShip;
+		spacecraft.vx *= -1;
+
+		if(spacecraft.isGoingDown)
+		{
+			spacecraft.py += 5;
+		}
+		else
+		{
+			spacecraft.py -= 5;
+		}
+	}
+	
+	if(spacecraft.py < spacecraft.sizeShip)
+	{
+		spacecraft.px = spacecraft.sizeShip;
+		spacecraft.vx *= -1.1;
+	}
+
+	if(spacecraft.py > canvasWidth - spacecraft.sizeShip)
+	{
+		spacecraft.py = canvasWidth - spacecraft.sizeShip;
+		spacecraft.vx *= -1.1;
+	}
+}
+
+const Space = {};
+Space.initializeSpace = (canvas, context) =>
+{
+	Space.canvas = canvas;
+	Space.context = context;
+
+	Space.xBound = canvas.width;
+	Space.yBound = canvas.height;
+
+	Space.player = new SpaceShip(canvas.width / 2, canvas.height - 10, 0, 0);
+
+	Space.enemies = new Array();
+	Space.bullets = new Array();
+
+	let numberOfEnemies = 300;
+
+	for(let index = 0; index < numberOfEnemies / 2; ++index)
+	{
+		Space.enemies.push(new SpaceShip(random(Space.xBound - 20, 10), random(Space.yBound/2), random(5, 1), 0));
+		Space.enemies.push(new SpaceShip(random(Space.xBound - 20, 10), random(Space.yBound/2), -1*random(5, 1), 0));
+	}
+}
+
+function random(max, min = 0)
+{
+	return min + Math.floor(Math.random()*(max-min));
 }
 
 class View
 {
-	constructor(canvas)
+	static drawSpaceCraft(spaceship, color)
 	{
-		this.canvas = canvas;
-		this.context = canvas.getContext("2d");
-	}
+		const context = Space.context;
+		let player = Space.player;
 
-	drawPlayer(player, color)
-	{
-		this.context.beginPath();
-		this.context.moveTo(player.x - 5, player.y);
-		this.context.lineTo(player.x + 5, player.y);
-		this.context.lineTo(player.x, player.y - 10);
-		this.context.closePath();
+		context.beginPath();
+		context.moveTo(spaceship.px - spaceship.sizeShip, spaceship.py);
+		context.lineTo(spaceship.px + spaceship.sizeShip, spaceship.py);
+		context.lineTo(spaceship.px, spaceship.py - (spaceship.sizeShip*2));
+		context.closePath();
 
-		this.context.fillStyle = color;
-		this.context.fill();
+		context.fillStyle = color;
+		context.fill();
 		
-		this.context.fillStyle = "blue";
-		this.context.fillRect(player.x - 2.5, player.y - 5, 5, 5);
-	}
-
-	drawEnemies()
-	{
-		this.context.fillStyle = "green";
-		this.context.fillRect(300, 300, 5, 5);
+		context.fillStyle = color;
+		context.fillRect(spaceship.px - 2.5, spaceship.py - 5, 5, 5);
 	}
 		
-	draw(player, color)
+	static draw(player)
 	{
-		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		const canvas = Space.canvas;
+		const context = Space.context;
 
-		// this.context.drawImage(image, player.x, player.y, 50, 50);
+		View.drawSpaceCraft(player, `rgb(${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)})`);
+	}
 
-		this.drawPlayer(player, color);
-		this.drawEnemies();
+	static drawAll(spaceships)
+	{
+		spaceships.forEach(View.draw);
 	}
 }
 
 window.onload = function()
 {
-	let canvas = document.getElementById("game_area");
-	console.log(canvas);
-	
-	let context = canvas.getContext("2d");
-	window.view = new View(canvas);
+	const canvas = document.getElementById("game_area");
+	canvas.style.position = 'absolute';
+	const context = canvas.getContext("2d");
 
-	let game = new Space(canvas);
-
-	game.build(canvas);
-
-	window.setInterval(() =>
-	{
-		view.draw(game.player, "cyan");
-	}, 16);
+	Space.initializeSpace(canvas, context);
 
 	let keysPressed = [];
 	window.addEventListener("keydown", (event) =>
 		{
 			keysPressed[event.keyCode] = true;
+
+			if(keysPressed[32])
+			{
+				Space.player.fire();
+			}
 			
 			if(keysPressed[37])
 			{
-				// game.player.updatePosition(LEFT);
-				game.player.ax -= 0.2;
-				game.player.vx += game.player.ax;
-				game.player.x += game.player.vx;
+				Space.player.vx -= 0.2;
 			}
 
 			if(keysPressed[38])
 			{
-				// game.player.updatePosition(UP);
-				game.player.ay -= 0.2;
-				game.player.vy += game.player.ay;
-				game.player.a += game.player.vy;
+				Space.player.vy -= 0.2;
 			}
 
 			if(keysPressed[39])
 			{
-				// game.player.updatePosition(RIGHT);
-				game.player.ax += 0.2;
-				game.player.vx += game.player.ax;
-				game.player.x += game.player.vx;
+				Space.player.vx += 0.2;
 			}
 
 			if(keysPressed[40])
 			{
-				// game.player.updatePosition(DOWN);
-				game.player.ay += 0.2;
-				game.player.ay += game.player.ay;
-				game.player.y += game.player.vy;
+				Space.player.vy += 0.2;
 			}
 
-			console.log("x = " + game.player.x + "\ty = " + game.player.y);
+			event.preventDefault();
 		});
 
 	window.addEventListener("keyup", (event) =>
 		{
 			keysPressed[event.keyCode] = false;
+			Space.player.vy *= 0.5;
+			Space.player.vx *= 0.5;
 		});
 
-	//window.view.draw(game.player, "cyan");
 
+	window.requestAnimationFrame(game);
 };
+
+function game(timestamp)
+{
+	updatePositionPlayer(Space.player, Space.xBound, Space.yBound);
+
+	Space.enemies.forEach( (ship, index) =>
+	{
+		updatePositionEnemy(ship, Space.xBound, Space.yBound);
+	});
+
+	Space.context.clearRect(0, 0, Space.xBound, Space.yBound);
+	View.drawAll([Space.player, ...Space.enemies]);
+
+	window.requestAnimationFrame(game);
+}
