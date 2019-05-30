@@ -2,7 +2,7 @@
 
 class SpaceShip
 {
-	constructor(px, py, vx, vy)
+	constructor(px, py, vx, vy, color, isPlayer)
 	{		
 		this.px = px;
 		this.py = py;
@@ -11,7 +11,9 @@ class SpaceShip
 		this.vy = vy;
 
 		this.sizeShip = 5;
+		this.color = color;
 
+		this.isPlayer = isPlayer;
 		this.isAlive = true;
 
 		this.isGoingDown = true;
@@ -19,23 +21,58 @@ class SpaceShip
 
 	fire()
 	{
+		Space.bullets.push(new Bullet(this.px, this.py, this.vy, this.vx));
+	}
 
+	die()
+	{
+		this.isAlive = false;
 	}
 }
 
-class bullets
+class Bullet
 {
-	constructor(px, py, vx, vy)
+	constructor(px, py, vy, vx)
 	{
 		this.px = px;
 		this.py = py;
 
-		this.pyMax = py - Space.yBound/2;
-		
-		this.vx = vx;
-		this.vy = vy;
+		this.pyMax = py - (Space.yBound/2);
 
-		this.exists = true;
+		if(vy == 0)
+		{
+			this.vy = vx;
+		}
+		else
+		{
+			this.vy = vy;
+		}
+
+		if(this.vy > 0)
+		{
+			this.vy = -this.vy;
+		}
+		else
+		{
+			this.vy = this.vy;
+		}
+
+		this.radius = 1;
+		this.color = "white";
+
+		this.isAlive = true;
+	}
+
+	hit(spaceship)
+	{
+		if(this.px >= spaceship.px - 2.5 &&
+			this.px <= spaceship.px + 2.5 &&
+			this.py >= spaceship.py - 5 &&
+			this.py <= spaceship.py)
+		{
+			spaceship.isAlive = false;
+			console.log("hit !");
+		}
 	}
 }
 
@@ -44,12 +81,14 @@ function updatePositionPlayer(spacecraft, canvasWidth, canvasHeight)
 	spacecraft.px += spacecraft.vx;
 	spacecraft.py += spacecraft.vy;
 
-	if(spacecraft.px < spacecraft.sizeShip || spacecraft.px > canvasWidth - spacecraft.sizeShip)
+	if(spacecraft.px < spacecraft.sizeShip ||
+		spacecraft.px > canvasWidth - spacecraft.sizeShip)
 	{
 		spacecraft.vx *= -1;
 	}
 
-	if(spacecraft.py < spacecraft.sizeShip || spacecraft.py > canvasWidth - spacecraft.sizeShip)
+	if(spacecraft.py < spacecraft.sizeShip ||
+		spacecraft.py > canvasWidth - spacecraft.sizeShip)
 	{
 		spacecraft.vy *= -1;
 	}	
@@ -103,37 +142,20 @@ function updatePositionEnemy(spacecraft, canvasWidth, canvasHeight)
 	}
 }
 
-const Space = {};
-Space.initializeSpace = (canvas, context) =>
+function updatePositionBullet(bullet)
 {
-	Space.canvas = canvas;
-	Space.context = context;
+	bullet.py += bullet.vy;
+	bullet.vy *= 0.99;
 
-	Space.xBound = canvas.width;
-	Space.yBound = canvas.height;
-
-	Space.player = new SpaceShip(canvas.width / 2, canvas.height - 10, 0, 0);
-
-	Space.enemies = new Array();
-	Space.bullets = new Array();
-
-	let numberOfEnemies = 300;
-
-	for(let index = 0; index < numberOfEnemies / 2; ++index)
+	if(bullet.py <= bullet.pyMax)
 	{
-		Space.enemies.push(new SpaceShip(random(Space.xBound - 20, 10), random(Space.yBound/2), random(5, 1), 0));
-		Space.enemies.push(new SpaceShip(random(Space.xBound - 20, 10), random(Space.yBound/2), -1*random(5, 1), 0));
+		bullet.isAlive = false;
 	}
-}
-
-function random(max, min = 0)
-{
-	return min + Math.floor(Math.random()*(max-min));
 }
 
 class View
 {
-	static drawSpaceCraft(spaceship, color)
+	static drawSpaceCraft(spaceship)
 	{
 		const context = Space.context;
 		let player = Space.player;
@@ -144,25 +166,79 @@ class View
 		context.lineTo(spaceship.px, spaceship.py - (spaceship.sizeShip*2));
 		context.closePath();
 
-		context.fillStyle = color;
+		context.fillStyle = spaceship.color;
 		context.fill();
 		
-		context.fillStyle = color;
-		context.fillRect(spaceship.px - 2.5, spaceship.py - 5, 5, 5);
+		/**
+		 * Debug : draw the bounding box
+		 */
+		//context.fillStyle = "white";
+		//context.fillRect(spaceship.px - 2.5, spaceship.py - 5, 5, 5);
 	}
-		
-	static draw(player)
+
+	static drawBullet(bullet)
 	{
 		const canvas = Space.canvas;
 		const context = Space.context;
 
-		View.drawSpaceCraft(player, `rgb(${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)})`);
+		context.beginPath();
+		context.arc(bullet.px, bullet.py, 1, 0, 2*Math.PI);
+		context.fillStyle = bullet.color;
+		context.fill();
 	}
 
-	static drawAll(spaceships)
+	static drawAll(spaceships, bullets)
 	{
-		spaceships.forEach(View.draw);
+		spaceships.forEach(View.drawSpaceCraft);
+		bullets.forEach(View.drawBullet);
 	}
+}
+
+const Space = {};
+Space.initializeSpace = (canvas, context) =>
+{
+	Space.canvas = canvas;
+	Space.context = context;
+
+	Space.xBound = canvas.width;
+	Space.yBound = canvas.height;
+
+	Space.player = new SpaceShip(canvas.width / 2, canvas.height - 10, 0, 0, "cyan", true);
+
+	Space.enemies = new Array();
+	Space.bullets = new Array();
+
+	let numberOfEnemies = 10;
+
+	for(let index = 0; index < numberOfEnemies / 2; ++index)
+	{
+		Space.enemies.push(new SpaceShip(random(Space.xBound - 20, 10), random(Space.yBound/2), random(5, 1), 0, "green", false));
+		Space.enemies.push(new SpaceShip(random(Space.xBound - 20, 10), random(Space.yBound/2), -1*random(5, 1), 0, "green", false));
+	}
+}
+
+Space.clearBodies = () =>
+{
+	Space.enemies.forEach((spaceship, index) =>
+		{
+			if(!spaceship.isAlive)
+			{
+				Space.enemies.splice(index);
+			}
+		});
+
+	Space.bullets.forEach((bullet, index) =>
+		{
+			if(!bullet.isAlive)
+			{
+				Space.bullets.splice(index);
+			}	
+		});
+}
+
+function random(max, min = 0)
+{
+	return min + Math.floor(Math.random()*(max-min));
 }
 
 window.onload = function()
@@ -203,7 +279,7 @@ window.onload = function()
 				Space.player.vy += 0.2;
 			}
 
-			event.preventDefault();
+			//event.preventDefault();
 		});
 
 	window.addEventListener("keyup", (event) =>
@@ -212,7 +288,6 @@ window.onload = function()
 			Space.player.vy *= 0.5;
 			Space.player.vx *= 0.5;
 		});
-
 
 	window.requestAnimationFrame(game);
 };
@@ -223,11 +298,18 @@ function game(timestamp)
 
 	Space.enemies.forEach( (ship, index) =>
 	{
-		updatePositionEnemy(ship, Space.xBound, Space.yBound);
+		//updatePositionEnemy(ship, Space.xBound, Space.yBound);
 	});
 
+	Space.bullets.forEach( (bullet, index) =>
+	{
+		updatePositionBullet(bullet);
+	});
+
+	Space.clearBodies();
+
 	Space.context.clearRect(0, 0, Space.xBound, Space.yBound);
-	View.drawAll([Space.player, ...Space.enemies]);
+	View.drawAll([Space.player, ...Space.enemies], Space.bullets);
 
 	window.requestAnimationFrame(game);
 }
