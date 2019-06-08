@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<title>Lost In Space</title>
+			<meta charset="utf-8">
+			<link rel="stylesheet" type="text/css" href="CR_LostInSpace.css">
+		</head>
+		<body>
+			<h2 class="centered">Programmation Web avec JavaScript</h2>
+			<h1 class="centered">Lost in Space</h1>
+			<div class="right">
+				<p>
+					Emilie Marti - Ingénieur Informatique I
+				</p>
+			</div>
+
+			<div class="tp">
+				<h2>
+					Classes
+				</h2>
+
+				<ol>
+					<li>
+						<h3>
+							SpaceShip
+						</h3>
+						<p>
+							<p>
+								Il s'agit d'une classe caractérisant tous les vaisseaux, enemies et allié. Chaque instance de cette classe possède une position en x et y, une vitesse en x et y, une taille de 5 et une couleur.
+							</p>
+
+							<p>
+								La vitesse des vaisseaux sur l'axe des y sera toujours 0.
+							</p>
+
+							<p>
+								Il y a également trois booléens :
+							</p>
+
+							<p>
+								<ul>
+									<li>
+										<h4>
+											<b>
+												isPlayer
+											</b>
+										</h4>
+
+										<p>
+											Indique si le vaisseau est le héro controllé par le joueur ou pas.
+										</p>
+									</li>
+
+									<li>
+										<h4>
+											<b>
+												isAlive
+											</b>
+										</h4>
+
+										<p>
+											Indique si le vaisseau est toujours en vie ou pas.
+										</p>
+									</li>
+
+									<li>
+										<h4>
+											<b>
+												isGoingDown
+											</b>
+										</h4>
+
+										<p>
+											Important pour les vaisseaux enemies, indique s'ils vont vers le bas ou pas (pour les faire rebondir correctement lorsqu'ils atteignent un bord haut ou bas).
+										</p>
+									</li>
+								</ul>
+							</p>
+
+							<p>
+								Il y a deux fonctions associés à la classe :
+							</p>
+							<p>
+								<ul>
+									<li>
+										<h4>
+											<b>
+												fire()
+											</b>
+										</h4>
+
+										<p>
+											<p>
+												Important pour le vaisseau du joueur, il s'agit d'une fonction qui va tout simplement rajouter une nouvelle instance de Bullet (balle) au tableau qui gère les balles.
+											</p>
+											<p>
+												Chaque nouvelle instance est créée avec la position du joueur et sa vitesse. Plus d'information ci-dessous dans la section Bullet.
+											</p>
+										</p>
+									</li>
+
+									<li>
+										<h4>
+											<b>
+												bumps(spaceship)
+											</b>
+										</h4>
+
+										<p>
+											<p>
+												Il s'agit de la fonction qui va détecter la collision entre le joueur et les autres vaisseaux enemies.
+											</p>
+											<p>
+												S'il y a collision, elle va mettre à false le champs isAlive du vaisseau passé en paramètre.
+											</p>
+										</p>
+									</li>
+								</ul>
+							</p>
+						</p>
+					</li>
+
+					<li>
+						<h3>
+							Bullet
+						</h3>
+						<p>
+							<p>
+								Il s'agit de la classe caractérisant les balles tirées par le joueur. Elles sont caractérisées par une position sur les axes x et y, la première correspondant à la position du vaisseau - 6 (pour qu'elles sortent depuis le bout du canon) et une vitesse sur l'axe des y, puisqu'elles vont se déplacer vers le haut uniquement.
+							</p>
+							
+							<p>
+								Elles ont également un champs de portée qui correspond à la moitié du canvas à partir de leur position initiale, un champs rayon qui est de 1, un champs couleur et un booléen isAlive, qui a la même utilité que le champs isAlive de SpaceShip.
+							</p>
+
+							<p>
+								La fonction associée à cette classe est la suivante :
+							</p>
+
+							<p>
+								<ul>
+									<li>
+										<h4>
+											<b>
+												hits(spaceship)
+											</b>
+										</h4>
+
+										<p>
+											<p>
+												Cette fonction détecte la collision entre une balle et un vaisseau passé en paramètre. 
+											</p>
+											<p>
+												Lorsqu'il y a collision, elle met les champs isAlive des deux objets à false.
+											</p>
+										</p>
+									</li>
+								</ul>
+							</p>
+						</p>
+					</li>
+
+					<li>
+						<h3>
+							View
+						</h3>
+						<p>
+							<p>
+								Il s'agit d'une classe qui ne va être jamais instanciée et qui possède des fonctions statiques qui concernent l'affichage graphique.
+							</p>
+							
+							<p>
+								Le choix de cette classe est motivé par l'envie de bien organiser le code, en mettant les fonctions qui gèrent le dessin ensemble.
+							</p>
+
+							<p>
+								Ceci est d'autand plus important du fait que tout le code du jeu est sur le même fichier .js ; ce serait moins optimisé de demander à charger plusieurs fichiers .js pour un même site, ce pourquoi on fait mieux de tout mettre au même endroit.
+							</p>
+
+							<p>
+								Pour des soucis de lisibilité de code et de débug, il faut donc bien ordonner le code et ses fonctions pour ne pas s'y perdre.
+							</p>
+
+							<p>
+								Les fonctions présentes dans cette classe sont les suivantes :
+							</p>
+
+							<p>
+								<ul>
+									<li>
+										<h4>
+											<b>
+												drawSpaceCraft(spaceship)
+											</b>
+										</h4>
+
+										<p>
+											Cette fonction va dessiner un rectangle à partir de la position et de la taille du vaisseau ; elle va ensuite colorier le vaisseau avec son champs color.
+										</p>
+
+										<p>
+											Elle va récupérer le canvas et le context à partir de la variable Space (décrite dans la section ci-dessous).
+										</p>
+									</li>
+
+									<li>
+										<h4>
+											<b>
+												drawBullet(bullet)
+											</b>
+										</h4>
+
+										<p>
+											Cette fonction va dessiner un cercle à partir de la position et du rayon de la balle. Elle va ensuite le colorier avec sa couleur.
+										</p>
+									</li>
+
+									<li>
+										<h4>
+											<b>
+												drawAll(spaceships, bullets)
+											</b>
+										</h4>
+
+										<p>
+											Cette fonction va parcourir les deux tableaux passés en paramètre et va appeler les fonctions décrites ci-dessus pour dessiner tous les éléments de l'espace courant.
+										</p>
+
+										<p>
+											Tous les éléments de ces deux tableaux ont le champs isAlive à true. Le nettoyage des vaisseaux et balles morts se fait en amont de l'appel de cette fonction.
+										</p>
+									</li>
+								</ul>
+							</p>
+						</p>
+					</li>
+				</ol>
+
+				<h2>
+					Variable Globale - Space
+				</h2>
+				<p>
+					J'ai fait le choix de créer une seule variable globale, Space, qui va pouvoir être accessible partout dans le code. Il s'agit d'un simple tableau vide lors de sa déclaration.
+				</p>
+
+				<p>
+					Les deux variables suivantes y sont associées :
+				</p>
+
+				<p>
+					<ul>
+						<li>
+							<h4>
+								<b>
+									Space.initializeSpace
+								</b>
+							</h4>
+
+							<p>
+								<p>
+									Fonction anonyme qui permettra d'initialiser l'espace de jeu.
+								</p>
+
+								<p>
+									Elle déclare et initialise les champs canvas et context, qui sont chargés une seule fois et passés en paramètres lors de la construction de l'espace. 
+								</p>
+
+								<p>
+									Ceci permet de s'assurer que toutes les fonctions faisant appel à canvas soient sur le même et il n'y ai pas de chargements hazardeux d'un nouveau canvas autre part dans le code.
+								</p>
+
+								<p>
+									On y sauvegarde la taille également, pour ne pas avoir à faire l'appel à canvas.width/height tout le temps (ce sera plus rapide).
+								</p>
+
+								<p>
+									Elle initialise le joueur puis deux tableaux ; l'un correspondant aux enemies et l'autre aux balles.
+								</p>
+
+								<p>
+									Enfin, elle rempli le tableau d'enemies avec les 300 enemies demandés dans la consigne : Une moitié commencera son mouvement vers droite, une moitié vers la gauche. Leurs positions initiale sur x est aléatoire (pour rendre la présentation du jeu plus fluide), et leurs position sur l'axe des y l'est aussi mais que sur la moitié supérieure du canvas.
+								</p>
+							</p>
+						</li>
+
+						<li>
+							<h4>
+								<b>
+									Space.clearBodies
+								</b>
+							</h4>
+
+							<p>
+								<p>
+									Variable contenant également une fonction anonyme.
+								</p>
+
+								<p>
+									Il s'agit de la fonction qui va filtrer tous les corps des tableaux des vaisseaux énemies et des balles, et va enlever les corps qui ont leurs champs isAlive à false.
+								</p>
+
+								<p>
+									J'utilise la méthode filter de JavaScript qui permet de récupérer seulement les éléments que je souhaite sous une condition passée en paramètre.
+								</p>
+
+								<p>
+									Les nouveaux tableaux filtrés (avec la condition isAlive == true) remplaceront les tableaux courants.
+								</p>
+
+								<p>
+									Après l'appel à clearBodies, les tableaux de Space n'ont que les corps vivants.
+								</p>
+							</p>
+						</li>
+					</ul>
+				</p>		
+
+
+				<p>
+				</p>
+
+				<h2>
+					Fonctions
+				</h2>
+				<p>
+					<p>
+						Ici seront décrites les fonctions qui ne sont pas directement associées à des classes.
+					</p>
+
+					<ol>
+					<li>
+						<h3>
+							updatePositionPlayer
+						</h3>
+						<p>
+							<p>
+								Cette fonction va tout simplement mettre à jour la position du joueur en fonction de sa vitesse courante.
+							</p>
+
+							<p>
+								Lorsque le joueur percute l'un des bords, il rebondit avec la même vitesse de tamponnement contre le bord.
+							</p>
+						</p>
+					</li>
+
+					<li>
+						<h3>
+							updatePositionEnemy
+						</h3>
+						<p>
+							<p>
+								Cette fonction va mettre à jour la position d'un vaisseau enemie à partir de sa vitesse courante.
+							</p>
+
+							<p>
+								Pour que l'enemie déscende doucement vers le bas, lorsqu'il percute l'un des bords (gauche ou droite) il fait un petit saut de 5 pixels vers le bas. Il en va de même lorsqu'il monte (mais avec des petits sauts vers le haut).
+							</p>
+
+							<p>
+								Ceci permet de conserver le mouvement horizontal classique des enemies tout en faisant descendre les enemies petit à petit (ou remonter s'ils ont atteind le bas). Ici l'intérêt du booléen isGoingDown.
+							</p>
+
+							<p>
+								C'est ici que la vitesse va augmenter de 10% lorsqu'un vaisseau atteind un bord haut ou bas.
+							</p>
+						</p>
+					</li>
+
+					<p>
+						Les deux fonctions ci-dessus sont séparées car seules deux lignes sont communes ; tout le reste, les conditions de percussion avec les bords ou autres, sont propres à chaque type de vaisseau.
+					</p>
+
+					<p>
+						Pour des raisons de meilleure lisibilité de code et de débug plus facile, j'ai décidé de les séparer. En effet, si j'ai des bug de mise à jour de position sur un type de vaisseau, je sais ainsi exactement où aller voir.
+					</p>
+
+					<li>
+						<h3>
+							updatePositionBullet
+						</h3>
+						<p>
+							<p>
+								Fonction de mise à jour de la position des balles. Elles partent vers le haut avec une vitesse initiale égale à la vitesse du vaisseau quand il l'a tiré, mais elles perdent de la vitesse à chaque tour de boucle (1%).
+							</p>
+
+							<p>
+								Si elles ne touchent pas d'énemie, elles doivent disparaître lorsqu'elles atteignent leurs portées maximales. C'est ici que cette condition est vérifiée.
+							</p>
+
+							<p>
+								Pour éviter qu'une balle ne perde toute sa vitesse et s'arrète (et ne disparaisse jamais à moins qu'un vaisseau percute par chance dessus), elle possède une vitesse minimale de -0.1, ce qui peut être justifié par l'inertie dans l'espace.
+							</p>
+						</p>
+					</li>
+
+					<li>
+						<h3>
+							random
+						</h3>
+						<p>
+							Fonction auxiliaire qui retourne un nombre random compris entre le maximum et le minimum passés en paramètres.
+						</p>
+
+						<p>
+							La plupart du temps minimum est égal à 0, donc on lui met une valeur par défaut dans les paramètres.
+						</p>
+					</li>
+
+					<li>
+						<h3>
+							window.onload
+						</h3>
+
+						<p>
+							Il s'agit d'une variable qui a pour valeur une fonction anonyme qui va se déclencher lorsque le site html sera chargé.
+						</p>
+
+						<p>
+							Cette fonction va initialiser le canvas et son contexte, puis va appeler la fonction d'initialisation de l'espace.
+						</p>
+
+						<p>
+							Elle va également gérer les entrées clavier du joueur (input).
+						</p>
+
+						<p>
+							Afin de gérer correctement les input, on créé un tableau de booléens qu'on va utiliser dans notre listener : window.addEventListener.
+						</p>
+
+						<p>
+							Deux listener sont appelés :
+						</p>
+
+						<ul>
+							<li>
+								<h4>
+									<b>
+										keydown
+									</b>
+								</h4>
+
+								<p>
+									Cette fonction va récupérer les touches appuyées par le joueur. Lorsqu'une touche est appuyée, la case du tableau dont l'index correspond à son code numérique va se mettre à true.
+								</p>
+
+								<p>
+									Si la touche espace est appuyée, la fonction fire() du vaisseau player va être appelée.
+								</p>
+
+								<p>
+									Si une ou plusieurs touches flèche sont appuyées, la vitesse du vaisseau joueur est directement mise à jour d'un facteur 0.2 .
+								</p>
+
+								<p>
+									L'intérêt de cette méthode est de permettre au joueur d'accumuler les input ; en effet, il peut vouloir accélerer en même temps qu'il tire, voire d'aller en diagonale en appuyant sur haut et droite, etc.
+								</p>
+
+								<p>
+									Les touches appuyées sont mises à true dans notre tableau de booléens et cela rend le gameplay beaucoup plus fluide que si on avait utilisé une autre méthode qui aurait géré les input un à un.
+								</p>
+
+								<p>
+									Enfin, event.preventDefault() permet de ne pas provoquer des modifications hors du canvas quelque soit la touche appuyée (par exemple, si par malchance le joueur appuie sur effacer, le site ne va pas aller en arrière en condamnant la partie de jeu courante).
+								</p>
+							</li>
+
+							<li>
+								<h4>
+									<b>
+										keyup
+									</b>
+								</h4>
+
+								<p>
+									Ce listener va écouter lorsque le joueur va lever le doigt de la touche et va mettre à jour avec des false les touches relevées.
+								</p>
+
+								<p>
+									Il va également multiplier la vitesse du vaisseau par 0.5, ce qui va la réduire mais laisser une petite inertie au vaisseau du joueur.
+								</p>
+							</li>
+						</ul>
+
+						<p>
+							Enfin, cette fonction va appeler window.requestAnimationFrame en passant en paramètre la fonction game, décrite ci-dessous.
+						</p>
+					</li>
+				</ol>
+				</p>
+
+				<h2>
+					Boucle principale - Game
+				</h2>
+				<p>
+					<p>
+						Fonction de la boucle principale.
+					</p>
+
+					<p>
+						Elle va d'abord mettre à jour la position de tous les corps du jeu. Dans la boucle parcourant le tableau d'énemies, elle va tester les collisions avec le joueur et avec les balles ; vu que le tableau d'énemies est potentiellement le plus grand, c'est mieux de parcourrir le tableau des balles pour chaque vaisseau énemie plutôt que l'inverse.
+					</p>
+
+					<p>
+						On fait appel à Space.clearBodies pour mettre à jour nos tableaux après avoir testé les collisions.
+					</p>
+
+					<p>
+						clearRect va tout simplement dessiner un rectangle de la taille du canvas avec la même couleur de fond, afin de nettoyer l'affichage courant pour pouvoir redessiner par dessus avec les positions à jour.
+					</p>
+
+					<p>
+						On dessine tous les corps.
+					</p>
+
+					<p>
+						On teste les conditions de fin ; soit le joueur est mort, soit tous les énemies sont morts et donc leur tableau a une taille de 0. Quoi qu'il en soit, si l'une de ces conditions est vérifiée, l'espace est réinitialisé et le jeu peut recommencer.
+					</p>
+
+					<p>
+						Enfin, l'appel à window.requestAnimationFrame(game) va tout simplement rappeler la fonction game, ce qui simule la boucle while, et toutes les instructions décrites ci-dessus vont se refaire, avec les nouveaux input.
+					</p>
+				</p>
+
+				<h2>
+					Interprétation du cahier des charges et choix de design
+				</h2>
+
+				<p>
+					Ici le choix de design graphique et des mécaniques non explicitées dans la consigne et justification.	
+				</p>
+
+				<p>
+					Le vaisseau du joueur n'a pas de couleur imposée donc est cyan ; en effet, lors du bricolage du vaisseau il y a eu également changement de couleur.
+				</p>
+
+				<p>
+					Les balles et le vaisseau allié n'ont jamais une vitesse de 0 (on peut réussir à freiner avec le vaisseau allié mais c'est difficile). En effet, dans l'espace il y a de l'inertie car pas de forces de frottement, donc sans énergie il n'y a pas d'accélération, mais il y aura toujours un déplacement vers la dernière direction empruntée.
+				</p>
+
+				<p>
+					On empêche l'utilisation des touches du clavier pour faire des changements dans le navigateur, ce qui permet de jouer sans se soucier de recharger la page ou autre accidentellement.
+				</p>
+
+				<p>
+					Lorsqu'une condition de fin est vérifiée, le jeu est automatiquement réinitialisé et directement rejouable.
+				</p>
+
+				<h2>Conclusion</h2>
+				<p>
+					Ce jeu a été codé entièrement en javascript ; seule la construction d'un site simple et la mise en place du canvas sont faits en html.
+				</p>
+
+				<p>
+					On a utilisé la version 2015 de JavaScript, qui utilise des classes (il s'agit d'une simulation de classe pour rendre le code plus objet et plus facile à organiser, mais ce n'est pas fondamentalement le cas) et des variables let et const au lieu de var.
+				</p>
+
+				<p>
+					Ce projet à permit de mettre en commun pas mal de notions abordées dans le cours pour aboutir à un jeu fonctionnel et jouable.
+				</p>
+			</div>
+		</body>
+	</html>

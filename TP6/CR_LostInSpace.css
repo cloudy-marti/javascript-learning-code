@@ -1,0 +1,62 @@
+html, body
+{
+	max-width: 100%;
+	overflow-x: hidden;
+	background-color: lightGrey;
+}
+
+html
+{
+    height:100%;
+}
+
+body
+{
+	font: 75% sans-serif;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 0.8em;
+}
+
+h1, h2, h3, p
+{
+	margin-left: 2.5%;
+	margin-right: 2.5%;
+}
+
+h1
+{
+    text-shadow: -0.1em 0 LightSteelBlue;
+    color: black;
+    letter-spacing: 0.08em;
+    font-size: 3em;
+}
+
+h2, h3, h4 
+{
+	font-weight: normal;
+	color: SteelBlue;
+}
+
+h2
+{
+	color: Grey;
+	margin-top: 1.5em;
+}
+
+ol
+{
+	list-style-type: upper-roman;
+}
+
+.tp
+{
+	margin: auto;
+	margin-bottom: 5em;
+	width: 80%;
+	text-align: justify;
+	border: 1.5px solid LightSteelBlue;
+	padding: 10px;
+	background-color: white;
+}
